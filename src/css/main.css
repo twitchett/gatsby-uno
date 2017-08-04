@@ -1,4 +1,7 @@
+/* original Uno theme from Jekyll-Uno */
 @import url('./theme/main.css');
+
+/* custom overrides and additions */
 @import url('./responsive.css');
 @import url('./custom.css');
 @import url('./forms.css');
