@@ -43,10 +43,10 @@ const TemplateWrapper = ({
 }) => (
     <div>
       <Helmet
-        title="Gatsby Default Starter"
+        title={ cfg.meta.title }
         meta={[
-          { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' },
+          { name: 'description', content: cfg.meta.description },
+          { name: 'keywords', content: cfg.meta.keywords },
         ]}
       />
       <Header />
