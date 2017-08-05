@@ -1,8 +1,13 @@
-/* original Uno theme from Jekyll-Uno */
+/* load bootstrap css */
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css");
+
+/* load original Uno theme from Jekyll-Uno */
 @import url('./theme/main.css');
 
-/* custom overrides and additions */
+/* load custom overrides and additions */
 @import url('./responsive.css');
 @import url('./custom.css');
 @import url('./forms.css');
 @import url('./page-cv.css');
+

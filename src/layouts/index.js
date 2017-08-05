@@ -3,64 +3,52 @@ import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
-import { Navigation, SocialNavigation } from './navigation.js'
+import SideBar from '../components/SideBar.js'
 import cfg from '../site-config.js'
-import cover from '../images/cover.jpg'
-import profile from '../images/profile.jpg'
 
 import '../css/main.css'
 
-const Header = () => (
-  <header className="panel-cover panel-cover--collapsed header-page-pagetype" style={{ backgroundImage: "url(" + cover + ")" }}>
-    <div className="panel-main">
+class MasterLayout extends React.Component {
+  render() {
+    let location = this.props.location.pathname
+    let currentPage
 
-      <div className="panel-main__inner panel-inverted">
-        <div className="panel-main__content">
-          <Link to="/">
-            <img src={ profile } className="user-image" alt={ cfg.author } />
-            <h1 className="panel-cover__title panel-title">{ cfg.title }</h1>
-          </Link>
-          <hr className="panel-cover__divider"></hr>
-          <p className="panel-cover__description">{ cfg.description }</p>
+    console.log('this.propers', this.props)
 
-          <hr className="panel-cover__divider panel-cover__divider--secondary"></hr>
+    currentPage = this.props.children()
+    // this has to be hardcoded for now
+    // if (location === '/') {
+    //   currentPage = this.props.children()
+    // } else if (location === '/about' || location === '/contact') {
+    //   currentPage = <PageLayout {...this.props} />
+    // } else {
+    //   currentPage = <PostLayout {...this.props} />
+    // }
 
-          <div className="navigation-wrapper">
-            <Navigation />
-            <hr className="panel-cover__divider panel-cover__divider--secondary"></hr>
-            <SocialNavigation cfg={ cfg } />
+    return (
+      <div>
+        <Helmet
+          title={ cfg.meta.title }
+          meta={[
+            { name: 'description', content: cfg.meta.description },
+            { name: 'keywords', content: cfg.meta.keywords },
+          ]}
+        >
+        </Helmet>
+        <SideBar currentPage={ location } cfg={ cfg }/>
+        <div className="content-wrapper">
+          <div className="content-wrapper__inner">
+            { currentPage }
           </div>
-
+          {/* TODO footer */}
         </div>
       </div>
-      <div className="panel-cover--overlay"></div>
-    </div>
-  </header>
-)
+    )
+  }
+}
 
-const TemplateWrapper = ({
-  children
-}) => (
-    <div>
-      <Helmet
-        title={ cfg.meta.title }
-        meta={[
-          { name: 'description', content: cfg.meta.description },
-          { name: 'keywords', content: cfg.meta.keywords },
-        ]}
-      />
-      <Header />
-      <div className="content-wrapper">
-        <div className="content-wrapper__inner">
-          { children() }
-        </div>
-        {/* TODO footer */}
-      </div>
-    </div>
-  )
-
-TemplateWrapper.propTypes = {
+MasterLayout.propTypes = {
   children: PropTypes.func,
 }
 
-export default TemplateWrapper
+export default MasterLayout

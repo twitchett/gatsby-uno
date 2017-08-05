@@ -16,7 +16,7 @@ export default function Index({
       </header>
 
       <div className="pre-post-list">
-      See all: <a href="/tags">tags</a> | <a href="/categories">categories</a>
+        See all: <a href="/tags">tags</a> | <a href="/categories">categories</a>
       </div>
 
       <hr className="post-list__divider"></hr>
@@ -31,10 +31,10 @@ export default function Index({
                     <Link to={ post.frontmatter.path }>{ post.frontmatter.title }</Link>
                   </h2>
                   <p className="excerpt">
-                    { post.excerpt }&hellip;
+                    { post.excerpt }
                   </p>
                   <div className="post-list__meta">
-                    <time className="post-list__meta--date date">{ post.frontmatter.date }</time> &#8226; 
+                    <time className="post-list__meta--date date">{ post.frontmatter.date }</time>
                     {/* TODO: tags */}
                     {/* TODO: categories */}
                   <hr className="post-list__divider"></hr>
@@ -53,8 +53,8 @@ export default function Index({
 }
 
 export const pageQuery = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+  query BlogPostsQuery {
+    allMarkdownRemark(filter: { frontmatter: { pagetype: { eq: "post" }}}) {
       edges {
         node {
           excerpt(pruneLength: 250)
@@ -67,5 +67,4 @@ export const pageQuery = graphql`
         }
       }
     }
-  }
-`;
+  }`

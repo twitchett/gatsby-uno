@@ -3,7 +3,7 @@ export default {
   author: 'B Thiam',
   title: 'Gatsby Uno Demo',
   description: 'Some pretty cool stuff',
-  email: 'your@email.here',
+  mail: 'your@email.here',
   twitter: 'twitter',
   facebook: 'facebook',
   github:  'github',
