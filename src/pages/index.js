@@ -8,7 +8,7 @@ export default function Index({
   data
 }) {
   const { edges: posts } = data.allMarkdownRemark
-  console.log('posts', posts)
+
   return (
     <div>
       <header className="page-header">
