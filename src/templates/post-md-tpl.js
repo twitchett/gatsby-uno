@@ -11,13 +11,14 @@ export default function PostTemplate ({
   data // injected by the GraphQL pageQuery
 }) {
   const { markdownRemark: post } = data // data.markdownRemark holds our post data
+  const { title, subtitle, date } = post.frontmatter
   return (
     <article className="post-container">
-      <Helmet title={ `Your Blog Name - ${post.frontmatter.title}` } />
-      <PageTitle title={ post.frontmatter.title } />
-      { post.frontmatter.subtitle && <h2 className="post-subtitle">{ post.frontmatter.subtitle }</h2> }
+      <Helmet title={ `Your Blog Name - ${title}` } />
+      <PageTitle title={ title } />
+      { subtitle && <h2 className="post-subtitle">{ subtitle }</h2> }
       <div className="post-meta">
-        <time className="post-list__meta--date date">{ post.frontmatter.date }</time>
+        <time className="post-list__meta--date date">{ date }</time>
         {/* tags */}
         {/* categories */}
       </div>
