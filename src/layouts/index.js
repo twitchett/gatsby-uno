@@ -13,8 +13,6 @@ class MasterLayout extends React.Component {
     let location = this.props.location.pathname
     let currentPage
 
-    console.log('this.propers', this.props)
-
     currentPage = this.props.children()
     // this has to be hardcoded for now
     // if (location === '/') {
@@ -35,7 +33,7 @@ class MasterLayout extends React.Component {
           ]}
         >
         </Helmet>
-        <SideBar currentPage={ location } cfg={ cfg }/>
+        <SideBar currentPage={ location } cfg={ cfg } />
         <div className="content-wrapper">
           <div className="content-wrapper__inner">
             { currentPage }

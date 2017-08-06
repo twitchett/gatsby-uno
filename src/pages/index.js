@@ -2,9 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
-// import '../css/index.css'; // add some style if you want!
-
-export default function Index({
+export default function Index ({
   data
 }) {
   const { edges: posts } = data.allMarkdownRemark
@@ -14,15 +12,11 @@ export default function Index({
       <header className="page-header">
         <h1 className="page-title">It's a blog</h1>
       </header>
-
       <div className="pre-post-list">
         See all: <a href="/tags">tags</a> | <a href="/categories">categories</a>
       </div>
-
       <hr className="post-list__divider"></hr>
-
       <div className="main-post-list">
-
         <ol className="post-list">{
             posts.map(({ node: post }) => {
               return (
@@ -44,9 +38,7 @@ export default function Index({
             })
           }
         </ol>
-
       {/* TODO: pagination */}
-
     </div>
   </div>
   )
@@ -63,6 +55,8 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             path
+            tags
+            categories
           }
         }
       }

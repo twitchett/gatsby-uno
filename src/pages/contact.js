@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import axios from 'axios'
 import update from 'immutability-helper'
+import PageTitle from '../components/PageTitle.js'
 
 export const data = {
   title: 'Contact',
@@ -81,20 +82,16 @@ class Contact extends React.Component {
 
     return (
       <div>
-        <header className="page-header">
-          <h1 className="page-title">{ data.title }</h1>
-        </header>
-        <div>
-          <form className="well form-horizontal contact_form" onSubmit={ this.handleSubmit } id="contact_form">
-            { alertEl }
-            <fieldset>
-              { this.renderTextInput('name', 'name', 'glyphicon-user') }
-              { this.renderTextInput('email', 'email', 'glyphicon-envelope') }
-              { this.renderTextArea('comment', 'Say something', 'glyphicon-pencil') }
-              { this.renderButton('submit', 'send', 'btn-warning', 'glyphicon-send') }
-            </fieldset>
-          </form>
-        </div>
+        <PageTitle title={ data.title } />
+        <form className="well form-horizontal contact_form" onSubmit={ this.handleSubmit } id="contact_form">
+          { alertEl }
+          <fieldset>
+            { this.renderTextInput('name', 'name', 'glyphicon-user') }
+            { this.renderTextInput('email', 'email', 'glyphicon-envelope') }
+            { this.renderTextArea('comment', 'Say something', 'glyphicon-pencil') }
+            { this.renderButton('submit', 'send', 'btn-warning', 'glyphicon-send') }
+          </fieldset>
+        </form>
       </div>
     )
   }

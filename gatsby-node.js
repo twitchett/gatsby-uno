@@ -1,9 +1,10 @@
-const path = require('path');
+const path = require('path')
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
-  const blogPostTemplate = path.resolve('src/templates/blog-post-tpl.js')
-  // graphQL query to fetch all pages
+  const postTemplate = path.resolve('src/templates/post-md-tpl.js')
+  const pageTemplate = path.resolve('src/templates/page-md-tpl.js')
+  // graphQL query to fetch all markdown pages
   const query = `{
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
@@ -11,13 +12,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     ) {
       edges {
         node {
-          excerpt(pruneLength: 250)
           html
           id
           frontmatter {
-            date
             path
             title
+            pagetype
           }
         }
       }
@@ -32,11 +32,17 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
       result.data.allMarkdownRemark.edges
         .forEach(({ node }) => {
+          let tpl = getTemplateForNode(node)
           createPage({
             path: node.frontmatter.path,
-            component: blogPostTemplate,
+            component: tpl,
             context: {} // additional data can be passed via context
           })
         })
     })
+
+    function getTemplateForNode (node) {
+      if (node.frontmatter.pagetype === 'page') return pageTemplate
+      if (node.frontmatter.pagetype === 'post') return postTemplate
+    }
 }
